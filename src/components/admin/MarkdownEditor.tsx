@@ -194,21 +194,21 @@ export function MarkdownEditor({
     return (
         <div className="border border-[var(--border-color)] rounded-lg overflow-hidden bg-white">
             {/* Toolbar */}
-            <div className="flex items-center justify-between px-3 py-2 border-b border-[var(--border-color)] bg-[var(--bg-secondary)]">
-                <div className="flex items-center gap-1">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between px-2 md:px-3 py-2 border-b border-[var(--border-color)] bg-[var(--bg-secondary)] gap-2">
+                <div className="flex items-center flex-wrap gap-0.5 md:gap-1">
                     {toolbarButtons.map((btn, i) => (
                         <button
                             key={i}
                             type="button"
                             onClick={btn.onClick}
                             title={btn.title}
-                            className={`px-2.5 py-1.5 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-gray-100 rounded transition-colors ${btn.style || ""}`}
+                            className={`px-2 py-1 md:px-2.5 md:py-1.5 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-gray-100 rounded transition-colors ${btn.style || ""}`}
                         >
                             {btn.icon}
                         </button>
                     ))}
 
-                    <div className="w-px h-5 bg-[var(--border-color)] mx-1" />
+                    <div className="w-px h-5 bg-[var(--border-color)] mx-0.5 md:mx-1" />
 
                     {/* Image Upload Button */}
                     <button
@@ -216,7 +216,7 @@ export function MarkdownEditor({
                         onClick={handleImageUpload}
                         disabled={isUploading}
                         title="Resim Ekle"
-                        className="px-2.5 py-1.5 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-gray-100 rounded transition-colors flex items-center gap-1"
+                        className="px-2 py-1 md:px-2.5 md:py-1.5 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-gray-100 rounded transition-colors flex items-center gap-1"
                     >
                         {isUploading ? (
                             <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24">
@@ -245,12 +245,12 @@ export function MarkdownEditor({
                                 />
                             </svg>
                         )}
-                        <span className="text-xs">Resim</span>
+                        <span className="text-xs hidden sm:inline">Resim</span>
                     </button>
                 </div>
 
                 {/* Preview Toggle */}
-                <div className="flex items-center bg-gray-100 rounded-lg p-0.5">
+                <div className="flex items-center bg-gray-100 rounded-lg p-0.5 self-start md:self-auto">
                     <button
                         type="button"
                         onClick={() => setPreviewMode(false)}

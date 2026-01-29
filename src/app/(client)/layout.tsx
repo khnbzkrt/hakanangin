@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import Link from "next/link";
+import MobileMenu from "@/components/MobileMenu";
 
 export default async function ClientLayout({
     children,
@@ -25,8 +26,8 @@ export default async function ClientLayout({
                             Cesiha
                         </Link>
 
-                        {/* Navigation */}
-                        <nav className="flex items-center gap-8">
+                        {/* Desktop Navigation */}
+                        <nav className="hidden md:flex items-center gap-8">
                             <Link
                                 href="/"
                                 className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] text-sm font-medium transition-colors"
@@ -63,6 +64,9 @@ export default async function ClientLayout({
                                 </Link>
                             )}
                         </nav>
+
+                        {/* Mobile Menu */}
+                        <MobileMenu isLoggedIn={!!user} />
                     </div>
                 </div>
             </header>

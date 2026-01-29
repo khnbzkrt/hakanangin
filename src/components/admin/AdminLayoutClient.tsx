@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface AdminLayoutClientProps {
     children: React.ReactNode;
@@ -10,8 +10,39 @@ interface AdminLayoutClientProps {
 }
 
 export function AdminLayoutClient({ children, userEmail }: AdminLayoutClientProps) {
-    const [sidebarOpen, setSidebarOpen] = useState(true);
+    const [sidebarOpen, setSidebarOpen] = useState(false);
     const pathname = usePathname();
+
+    // Close sidebar on route change (mobile)
+    useEffect(() => {
+        setSidebarOpen(false);
+    }, [pathname]);
+
+    // Set default sidebar state based on screen size
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth >= 768) {
+                setSidebarOpen(true);
+            } else {
+                setSidebarOpen(false);
+            }
+        };
+        handleResize();
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    // Prevent body scroll when sidebar is open on mobile
+    useEffect(() => {
+        if (sidebarOpen && window.innerWidth < 768) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "";
+        }
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, [sidebarOpen]);
 
     const isActive = (path: string) => {
         if (path === "/admin") {
@@ -23,8 +54,8 @@ export function AdminLayoutClient({ children, userEmail }: AdminLayoutClientProp
     return (
         <div className="admin-vintage min-h-screen bg-[var(--bg-primary)]">
             {/* Topbar */}
-            <header className="admin-topbar fixed top-0 left-0 right-0 h-16 bg-[var(--bg-secondary)] border-b border-[var(--border-color)] z-50 flex items-center justify-between px-6">
-                <div className="flex items-center gap-4">
+            <header className="admin-topbar fixed top-0 left-0 right-0 h-16 bg-[var(--bg-secondary)] border-b border-[var(--border-color)] z-50 flex items-center justify-between px-4 md:px-6">
+                <div className="flex items-center gap-3 md:gap-4">
                     {/* Toggle Button */}
                     <button
                         onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -36,41 +67,35 @@ export function AdminLayoutClient({ children, userEmail }: AdminLayoutClientProp
                             stroke="currentColor"
                             viewBox="0 0 24 24"
                         >
-                            {sidebarOpen ? (
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M11 19l-7-7 7-7m8 14l-7-7 7-7"
-                                />
-                            ) : (
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M4 6h16M4 12h16M4 18h16"
-                                />
-                            )}
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M4 6h16M4 12h16M4 18h16"
+                            />
                         </svg>
                     </button>
 
                     {/* Logo */}
                     <Link
                         href="/admin"
-                        className="font-['Playfair_Display'] text-xl font-semibold text-[var(--text-primary)]"
+                        className="font-['Playfair_Display'] text-lg md:text-xl font-semibold text-[var(--text-primary)]"
                     >
-                        Yönetim Paneli
+                        <span className="hidden sm:inline">Yönetim Paneli</span>
+                        <span className="sm:hidden">Yönetim</span>
                     </Link>
                 </div>
 
                 {/* Right Side */}
-                <div className="flex items-center gap-6">
-                    <span className="text-sm text-[var(--text-secondary)]">{userEmail}</span>
+                <div className="flex items-center gap-3 md:gap-6">
+                    {/* Email - Hidden on mobile */}
+                    <span className="hidden md:block text-sm text-[var(--text-secondary)]">{userEmail}</span>
 
+                    {/* View Site Link */}
                     <Link
                         href="/"
                         target="_blank"
-                        className="flex items-center gap-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+                        className="flex items-center gap-1 md:gap-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
                     >
                         <svg
                             className="w-4 h-4"
@@ -85,13 +110,14 @@ export function AdminLayoutClient({ children, userEmail }: AdminLayoutClientProp
                                 d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
                             />
                         </svg>
-                        Siteyi Gör
+                        <span className="hidden sm:inline">Siteyi Gör</span>
                     </Link>
 
+                    {/* Logout */}
                     <form action="/auth/signout" method="post">
                         <button
                             type="submit"
-                            className="flex items-center gap-2 text-sm text-[var(--text-secondary)] hover:text-red-600 transition-colors"
+                            className="flex items-center gap-1 md:gap-2 text-sm text-[var(--text-secondary)] hover:text-red-600 transition-colors"
                         >
                             <svg
                                 className="w-4 h-4"
@@ -106,15 +132,23 @@ export function AdminLayoutClient({ children, userEmail }: AdminLayoutClientProp
                                     d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
                                 />
                             </svg>
-                            Çıkış
+                            <span className="hidden sm:inline">Çıkış</span>
                         </button>
                     </form>
                 </div>
             </header>
 
+            {/* Overlay for mobile */}
+            {sidebarOpen && (
+                <div
+                    className="fixed inset-0 bg-black/50 z-30 md:hidden"
+                    onClick={() => setSidebarOpen(false)}
+                />
+            )}
+
             {/* Sidebar */}
             <aside
-                className={`admin-sidebar-vintage fixed left-0 top-16 h-[calc(100vh-4rem)] bg-[var(--bg-secondary)] border-r border-[var(--border-color)] transition-all duration-300 z-40 ${sidebarOpen ? "w-64" : "w-0 -translate-x-full"
+                className={`admin-sidebar-vintage fixed left-0 top-16 h-[calc(100vh-4rem)] bg-[var(--bg-secondary)] border-r border-[var(--border-color)] transition-all duration-300 z-40 ${sidebarOpen ? "w-64 translate-x-0" : "w-64 -translate-x-full md:w-0"
                     }`}
             >
                 <nav className="p-4 space-y-1">
@@ -144,10 +178,10 @@ export function AdminLayoutClient({ children, userEmail }: AdminLayoutClientProp
 
             {/* Main Content */}
             <main
-                className={`pt-16 min-h-screen transition-all duration-300 ${sidebarOpen ? "ml-64" : "ml-0"
+                className={`pt-16 min-h-screen transition-all duration-300 ${sidebarOpen ? "md:ml-64" : "ml-0"
                     }`}
             >
-                <div className="p-8">{children}</div>
+                <div className="p-4 md:p-8">{children}</div>
             </main>
         </div>
     );
@@ -211,3 +245,4 @@ function NavLink({
         </Link>
     );
 }
+
