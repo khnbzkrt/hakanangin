@@ -72,35 +72,10 @@ export default async function ClientLayout({
 
             {/* Footer - Medium Style */}
             <footer className="bg-[var(--bg-secondary)] border-t border-[var(--border-color)] py-8 mt-auto">
-                <div className="container-wide">
-                    <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-                        <div className="flex items-center gap-6">
-                            <Link
-                                href="/"
-                                className="font-['Playfair_Display'] text-lg font-semibold text-[var(--text-primary)]"
-                            >
-                                Cesiha
-                            </Link>
-                            <span className="text-[var(--text-muted)] text-sm">
-                                Türkiye&apos;nin güzellikleri
-                            </span>
-                        </div>
-
-                        <nav className="flex items-center gap-6 text-sm text-[var(--text-secondary)]">
-                            <Link href="/" className="hover:text-[var(--text-primary)] transition-colors">
-                                Ana Sayfa
-                            </Link>
-                            <Link href="/blog" className="hover:text-[var(--text-primary)] transition-colors">
-                                Yazılar
-                            </Link>
-                        </nav>
-                    </div>
-
-                    <div className="mt-6 pt-6 border-t border-[var(--border-color)] text-center">
-                        <p className="text-[var(--text-muted)] text-sm">
-                            © {new Date().getFullYear()} Cesiha. Tüm hakları saklıdır.
-                        </p>
-                    </div>
+                <div className="text-center">
+                    <p className="text-[var(--text-muted)] text-sm">
+                        © {new Date().getFullYear()} Cesiha. Tüm hakları saklıdır.
+                    </p>
                 </div>
             </footer>
         </div>
