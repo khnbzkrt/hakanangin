@@ -4,8 +4,14 @@ import { format } from "date-fns";
 import { tr } from "date-fns/locale";
 import Image from "next/image";
 import Link from "next/link";
+import { Metadata } from "next";
 
 export const revalidate = 60;
+
+export const metadata: Metadata = {
+    title: "Cesiha - Türkiye'nin Keşfedilmemiş Rotaları",
+    description: "Türkiye'nin doğal güzellikleri, tarihi dokusu ve kültürel mirasları hakkında derinlemesine yazılar ve keşif rotaları.",
+};
 
 export default async function HomePage() {
     const supabase = await createClient();
@@ -73,7 +79,7 @@ function FeaturedCard({ post, size }: { post: Post; size: "large" | "small" }) {
     return (
         <Link
             href={`/blog/${post.slug}`}
-            className={`group block relative overflow-hidden rounded-2xl ${isLarge ? "row-span-2 min-h-125" : "min-h-60"}`}
+            className={`group block relative overflow-hidden rounded-2xl ${isLarge ? "row-span-2 min-h-[500px]" : "min-h-[240px]"}`}
         >
             {/* Background */}
             {post.cover_image ? (
@@ -92,25 +98,25 @@ function FeaturedCard({ post, size }: { post: Post; size: "large" | "small" }) {
                 </div>
             )}
 
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-black/10" />
+            {/* Overlay - Darker and more consistent */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
 
             {/* Content */}
-            <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
-                <div className="flex items-center gap-2 text-white/70 text-xs mb-2">
+            <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+                <div className="flex items-center gap-2 text-white/90 text-xs font-medium mb-3">
                     <time dateTime={post.created_at}>
                         {format(new Date(post.created_at), "d MMM yyyy", { locale: tr })}
                     </time>
-                    <span>·</span>
+                    <span className="opacity-60">·</span>
                     <span>{readingTime} dk</span>
                 </div>
 
-                <h2 className={`font-['Playfair_Display'] font-bold text-white leading-tight group-hover:text-emerald-300 transition-colors ${isLarge ? "text-2xl md:text-3xl lg:text-4xl mb-3" : "text-base md:text-lg line-clamp-2"}`}>
+                <h2 className={`font-['Playfair_Display'] font-bold !text-white leading-tight group-hover:text-emerald-300 transition-colors ${isLarge ? "text-2xl md:text-3xl lg:text-4xl mb-4" : "text-lg md:text-xl line-clamp-2"}`}>
                     {post.title}
                 </h2>
 
                 {isLarge && post.excerpt && (
-                    <p className="text-white/80 line-clamp-2 text-sm md:text-base max-w-lg">
+                    <p className="!text-white/90 line-clamp-2 text-sm md:text-base max-w-lg leading-relaxed">
                         {post.excerpt}
                     </p>
                 )}
@@ -126,7 +132,7 @@ function ArticleCard({ post }: { post: Post }) {
         <Link href={`/blog/${post.slug}`} className="group block">
             <article>
                 {/* Image */}
-                <div className="relative aspect-video rounded-xl overflow-hidden mb-4 bg-slate-100">
+                <div className="relative aspect-video rounded-xl overflow-hidden mb-5 bg-slate-100 shadow-sm">
                     {post.cover_image ? (
                         <Image
                             src={post.cover_image}
@@ -144,20 +150,20 @@ function ArticleCard({ post }: { post: Post }) {
                 </div>
 
                 {/* Content */}
-                <div className="flex items-center gap-2 text-xs text-(--text-muted) mb-2">
+                <div className="flex items-center gap-2 text-xs text-[var(--text-secondary)] font-medium mb-3">
                     <time dateTime={post.created_at}>
                         {format(new Date(post.created_at), "d MMM yyyy", { locale: tr })}
                     </time>
-                    <span>·</span>
+                    <span className="opacity-40">·</span>
                     <span>{readingTime} dk okuma</span>
                 </div>
 
-                <h3 className="text-lg font-['Playfair_Display'] font-semibold text-(--text-primary) group-hover:text-(--accent) transition-colors leading-snug mb-2 line-clamp-2">
+                <h3 className="text-xl font-['Playfair_Display'] font-semibold text-[var(--text-primary)] group-hover:text-[var(--accent)] transition-colors leading-snug mb-3 line-clamp-2">
                     {post.title}
                 </h3>
 
                 {post.excerpt && (
-                    <p className="text-sm text-(--text-secondary) line-clamp-2">
+                    <p className="text-sm text-[var(--text-secondary)] line-clamp-3 leading-relaxed">
                         {post.excerpt}
                     </p>
                 )}

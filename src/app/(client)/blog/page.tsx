@@ -5,11 +5,17 @@ import { tr } from "date-fns/locale";
 import Image from "next/image";
 import Link from "next/link";
 
+import { Metadata } from "next";
+
 export const revalidate = 60;
 
-export const metadata = {
-    title: "Yazılar | Cesiha",
-    description: "Türkiye'nin doğal güzellikleri ve tarihi hakkında tüm yazılar",
+export const metadata: Metadata = {
+    title: "Yazılar",
+    description: "Türkiye'nin doğal güzellikleri, tarihi mekanları ve keşfedilmmemiş rotaları hakkında yazılarımız.",
+    openGraph: {
+        title: "Tüm Yazılar | Cesiha",
+        description: "Türkiye'nin her köşesinden keşif notları ve gezi yazıları.",
+    }
 };
 
 export default async function BlogPage() {
