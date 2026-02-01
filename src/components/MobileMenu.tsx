@@ -119,14 +119,7 @@ export default function MobileMenu({ isLoggedIn }: MobileMenuProps) {
                                 </button>
                             </form>
                         ) : (
-                            <Link
-                                href="/login"
-                                onClick={() => setIsOpen(false)}
-                                className="block w-full py-3 px-4 bg-[#1a1a1a] rounded-lg text-lg font-medium text-center hover:bg-[#333] transition-colors"
-                                style={{ color: "#ffffff" }}
-                            >
-                                Giriş Yap
-                            </Link>
+                            null
                         )}
                     </div>
                 </div>

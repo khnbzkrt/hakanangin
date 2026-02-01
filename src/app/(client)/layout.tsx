@@ -59,9 +59,7 @@ export default async function ClientLayout({
                                     </form>
                                 </div>
                             ) : (
-                                <Link href="/login" className="btn-primary">
-                                    Giriş Yap
-                                </Link>
+                                null
                             )}
                         </nav>
 
