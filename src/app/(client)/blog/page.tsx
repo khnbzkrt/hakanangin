@@ -36,7 +36,7 @@ export default async function BlogPage() {
                         Tüm Yazılar
                     </h1>
                     <p className="text-lg text-[var(--text-secondary)]">
-                        Türkiye&apos;nin doğal güzellikleri ve zengin tarihi hakkında
+                        Türkiye&apos;nin doğal güzellikleri ve kültürel mirasları hakkında
                         yazılarımız
                     </p>
                 </header>

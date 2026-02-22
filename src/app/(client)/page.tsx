@@ -192,12 +192,12 @@ function EmptyState() {
                     </svg>
                 </div>
 
-                <h1 className="text-3xl font-['Playfair_Display'] font-bold text-(--text-primary) mb-4">
+                <h1 className="text-3xl font-['Playfair_Display'] font-bold text-[var(--text-primary)] mb-4">
                     Yakında Burada
                 </h1>
 
-                <p className="text-lg text-(--text-secondary) leading-relaxed">
-                    Türkiye&apos;nin eşsiz doğal güzellikleri ve zengin tarihi hakkında yazılarımız çok yakında burada olacak.
+                <p className="text-lg text-[var(--text-secondary)] leading-relaxed">
+                    Türkiye&apos;nin eşsiz doğal güzellikleri ve kültürel mirasları hakkında yazılarımız çok yakında burada olacak.
                 </p>
             </div>
         </div>
