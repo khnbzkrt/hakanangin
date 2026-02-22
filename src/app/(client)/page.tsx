@@ -2,15 +2,15 @@ import { createClient } from "@/lib/supabase/server";
 import { Post } from "@/types/database";
 import { format } from "date-fns";
 import { tr } from "date-fns/locale";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Metadata } from "next";
 
 export const revalidate = 60;
 
 export const metadata: Metadata = {
-    title: "Cesiha - Türkiye'nin Keşfedilmemiş Rotaları",
-    description: "Türkiye'nin doğal güzellikleri, tarihi dokusu ve kültürel mirasları hakkında derinlemesine yazılar ve keşif rotaları.",
+    title: "Cesiha - Türkiye'nin Keşfedilmemiş Güzellikleri",
+    description: "Türkiye'nin doğal güzellikleri ve kültürel mirasları hakkında derinlemesine yazılar ve keşif rotaları.",
 };
 
 export default async function HomePage() {

@@ -11,7 +11,7 @@ export const revalidate = 60;
 
 export const metadata: Metadata = {
     title: "Yazılar",
-    description: "Türkiye'nin doğal güzellikleri, tarihi mekanları ve keşfedilmmemiş rotaları hakkında yazılarımız.",
+    description: "Türkiye'nin doğal güzellikleri ve kültürel mirasları hakkında yazılarımız.",
     openGraph: {
         title: "Tüm Yazılar | Cesiha",
         description: "Türkiye'nin her köşesinden keşif notları ve gezi yazıları.",

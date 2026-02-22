@@ -4,10 +4,10 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://cesiha.com"),
   title: {
-    default: "Cesiha - Türkiye'nin Doğal Güzellikleri",
+    default: "Cesiha - Türkiye'nin Keşfedilmemiş Güzellikleri",
     template: "%s | Cesiha",
   },
-  description: "Türkiye'nin eşsiz doğal güzellikleri, tarihi mekanları ve kültürel zenginlikleri hakkında yazılar. Gezilecek yerler, seyahat rehberleri ve keşfedilmemiş rotalar.",
+  description: "Türkiye'nin eşsiz doğal güzellikleri ve kültürel zenginlikleri hakkında yazılar. Gezilecek yerler, seyahat rehberleri ve keşfedilmemiş rotalar.",
   keywords: ["Türkiye", "gezi", "seyahat", "doğa", "tarih", "kültür", "turizm", "gezilecek yerler"],
   authors: [{ name: "Cesiha" }],
   creator: "Cesiha",
@@ -27,13 +27,13 @@ export const metadata: Metadata = {
     type: "website",
     locale: "tr_TR",
     siteName: "Cesiha",
-    title: "Cesiha - Türkiye'nin Doğal Güzellikleri",
-    description: "Türkiye'nin eşsiz doğal güzellikleri, tarihi mekanları ve kültürel zenginlikleri hakkında yazılar.",
+    title: "Cesiha - Türkiye'nin Keşfedilmemiş Güzellikleri",
+    description: "Türkiye'nin eşsiz doğal güzellikleri ve kültürel zenginlikleri hakkında yazılar.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cesiha - Türkiye'nin Doğal Güzellikleri",
-    description: "Türkiye'nin eşsiz doğal güzellikleri, tarihi mekanları ve kültürel zenginlikleri hakkında yazılar.",
+    title: "Cesiha - Türkiye'nin Keşfedilmemiş Güzellikleri",
+    description: "Türkiye'nin eşsiz doğal güzellikleri ve kültürel zenginlikleri hakkında yazılar.",
   },
 };
 
